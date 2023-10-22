@@ -526,6 +526,7 @@ function secondactionbutton() {
   if (GE("Action 1").value == "Steal 1") {
     GE("stealactionoptions").style.display = "initial";
     GE("Action 2 Steal").style.display = "initial";
+    GE("Steal List Num_" + turn_num).style.display = "none";
     GE("Action 2").setAttribute("disabled", "");
     setselectelement("Action 2", "Steal 2");
   } else {
@@ -538,6 +539,7 @@ function secondactionbutton() {
   if (GE("Action 1").value == "Murder 1") {
     GE("murderactionoptions").style.display = "initial";
     GE("Action 2 Murder").style.display = "initial";
+    GE("Murder List Num_" + turn_num).style.display = "none";
     GE("Action 2").setAttribute("disabled", "");
     setselectelement("Action 2", "Murder 2");
     if (GE(tblbid(turn_num, 0, "m")).checked == true) {
@@ -672,6 +674,8 @@ function submitactions() {
     GE("invaildinputstext").style.display = "none";
     hideelements("playerturn1");
   	showelements("playerturn2");
+    GE("Steal List Num_" + turn_num).style.display = "initial";
+    GE("Steal List Num_" + turn_num).style.display = "initial";
   	GE("Success Failure Text").innerHTML = "";
     if (twoactionoptions.has(action1value) && playerinjail == false) {
       if (action1value == "Steal 1") {
