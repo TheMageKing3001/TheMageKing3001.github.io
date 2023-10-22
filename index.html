@@ -238,6 +238,12 @@ th {
     <br class="pregame"><br>
     <button onclick="startgame()" class="pregame">Start Game!</button>
     <br>
+    <p class="pregame"><b>For a reminder on the rules, read the following.</b></p>
+    <p class="pregame">HAT is a game with 10 rounds. Every round, each player will write down their actions, and then each action will take affect. On your turn, you have two actions to use. Working is 1 action, and will give you 5 gold. Watching is 1 action, and will half the chances that someone succeeds in stealing from you. Stealing is 2 actions. When you steal, you choose who to steal from, how much to steal, and how many times they watched. The chance of you failing and getting caught is (the amount you stole)/60 (e.x. Stealing 30 gold equates to a 50% chance of failure), and then halved for evrey time your target watched. If you get caught stealing, then you lose all your money and go to jail for 3 rounds. While in jail, the only things you can do are stay or you can to skedaddle. Skedaddling has a 1 in 3 chance of success, and instantly ends your sentence. However, if you fail, you are caught. If you skedaddle and fail while caught, then you are executed and are now dead. Dead players do not get turns.</p>
+    <p class="pregame">If you are using Murder rules, then you can use the shop and murder actions. Shop is 1 action, and lets you buy a sword, bribe, or a guard. Murder is 2 actions, and can only be done if you own a sword. When you take the murder action, you select someone who isn't in jail or dead, and attempt to kill them. If you fail to murder someone, then you are executed. If you succeed, however, then your target becomes dead and you get all their gold. You have a 75% chance of success, minus 25% if you do not have a bribe, minus 25% if your target watched at least once, and then halved if your target bought a guard that round. While bribes last until used, guards only last one round, so make sure they count!</p>
+    <p class="pregame">If you are using Bank rules, then you can use the visit bank and rob bank options. The bank starts off with 100 gold, and gains gold whenever someone steals and gets caught or whenever someone is executed or attempting to murder someone else. Visiting the bank is 1 action, and you can deposit or withdraw gold from your account. Deposited gold is not lost when you are caught stealing, and other players cannot directly steal your deposited gold. Robbing the bank is 2 actions. When you rob the bank, you give the guards a bribe of some amount of gold. You chance of success is this amount divided by the total number of gold in the bank, times 0.67. If you are caught trying to rob the bank, then you are sent to jail, are considered to be caught once already, and lose you rights to the shop and visit bank actions.</p>
+    <p class="pregame">Because HAT is meant to be played with no particular player turn order, but this website still uses one, sometimes the way gold works will seem a little strange. Trust me, it is all intended.</p>
+    
     <span id="Table Go Here"></span><br>
     
     <br>
@@ -323,8 +329,8 @@ th {
         <option>2</option>
       </select>
       <br class="murderhassword">
-      <label for="Murder Have Bodygaurd" class="murderhassword">Did they buy a boadygaurd this round? </label>
-      <select id="Murder Have Bodygaurd" name="Murder Have Bodygaurd" class="murderhassword">
+      <label for="Murder Have Bodyguard" class="murderhassword">Did they buy a guard this round? </label>
+      <select id="Murder Have Bodyguard" name="Murder Have Bodyguard" class="murderhassword">
         <option>Yes</option>
         <option>No</option>
       </select>
@@ -333,7 +339,7 @@ th {
     
     <span class="playerturn1 actionoptions" id="robbankactionoptions">
       <b>Rob Bank Options:</b><br>
-      <label for="Bank Bribe Input">Input how much gold you want to bribe the gaurds with: </label>
+      <label for="Bank Bribe Input">Input how much gold you want to bribe the guards with: </label>
       <input type="number" id="Bank Bribe Input" name="Bank Bribe Input" min="0">
       <br>
     </span>
@@ -343,20 +349,20 @@ th {
       <span id="Shop No Rights Message">You have lost your right to be in the shop.</span>
       
       <label class="checkboxstyle shophasrights">
-      Buy a sword (30 Gold)
+      Buy a Sword (30 Gold)
       <input type="checkbox" id="buyswordcheckbox" name="buyswordcheckbox">
       <span class="checkmark"></span>
       </label>
       <br class="shophasrights">
       <label class="checkboxstyle shophasrights">
-      Buy a bribe (20 Gold)
+      Buy a Bribe (20 Gold)
       <input type="checkbox" id="buybribecheckbox" name="buybribecheckbox">
       <span class="checkmark"></span>
       </label>
       <br class="shophasrights">
       <label class="checkboxstyle shophasrights">
-      Buy a bodygaurd (20 Gold)
-      <input type="checkbox" id="buygaurdcheckbox" name="buygaurdcheckbox">
+      Buy a guard (20 Gold)
+      <input type="checkbox" id="buyguardcheckbox" name="buyguardcheckbox">
       <span class="checkmark"></span>
       </label>
       <br class="shophasrights">
@@ -636,7 +642,7 @@ function submitactions() {
   }
   if (
     (GE("buyswordcheckbox").checked ? 30 : 0) +
-    (GE("buygaurdcheckbox").checked ? 20 : 0) +
+    (GE("buyguardcheckbox").checked ? 20 : 0) +
     (GE("buybribecheckbox").checked ? 20 : 0) >
     pocket_gold_list_startround[turn_num]
   ) {
@@ -647,7 +653,7 @@ function submitactions() {
     pocket_gold_list_startround[turn_num] - 
     (
     	(GE("buyswordcheckbox").checked ? 30 : 0) +
-    	(GE("buygaurdcheckbox").checked ? 20 : 0) +
+    	(GE("buyguardcheckbox").checked ? 20 : 0) +
     	(GE("buybribecheckbox").checked ? 20 : 0)
     ) < 
     Number(GE("Deposit/Withdrawal Num Input").value)
@@ -691,7 +697,7 @@ function submitactions() {
         if (GE(tblbid(murderedplayerindex, 2, "m")).checked == false) {
           message += " not";
         }
-        message += " have a bodygaurd";
+        message += " have a bodyguard";
       }
       if (action1value == "Rob Bank 1") {
         message = "rob the bank with a " + GE("Bank Bribe Input").value + " gold bribe";
@@ -734,8 +740,8 @@ function submitactions() {
             pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - 20;
             GE(tblbid(turn_num, 1, "m")).checked = true;
           }
-          if (GE("buygaurdcheckbox").checked == true) {
-            message += "a gaurd and ";
+          if (GE("buyguardcheckbox").checked == true) {
+            message += "a guard and ";
             pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - 20;
             GE(tblbid(turn_num, 2, "m")).checked = true;
           }
@@ -821,7 +827,7 @@ function rollprobability() {
       probability_of_success = probability_of_success - 0.25;
     }
     var murderedplayerindex = player_list.indexOf(GE("Murder Player").value);
-    if (GE("Murder Have Bodygaurd").value == "Yes") {
+    if (GE("Murder Have Bodyguard").value == "Yes") {
       probability_of_success = probability_of_success / 2;
     }
 
@@ -1165,11 +1171,11 @@ function clearforms() {
   GE("Steal How Many Watches").value = "";
   GE("Murder Player").value = "";
   GE("Murder How Many Watches").value = "";
-  GE("Murder Have Bodygaurd").value = "";
+  GE("Murder Have Bodyguard").value = "";
   GE("Bank Bribe Input").value = "";
   GE("buyswordcheckbox").checked = false;
   GE("buybribecheckbox").checked = false;
-  GE("buygaurdcheckbox").checked = false;
+  GE("buyguardcheckbox").checked = false;
   GE("Visit Bank Deposit Input").checked = false;
   GE("Visit Bank Withdrawal Input").checked = false;
   GE("Deposit/Withdrawal Num Input").value = "";
