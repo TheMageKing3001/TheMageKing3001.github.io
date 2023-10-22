@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>HAT Visual Aid</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="/js/lib/dummy.js"
+    
+  ></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+
+  <style id="compiled-css" type="text/css">
+    body {
+  background-color: #0E171B;
+  color: #CACECE;
+  font-family: "Times New Roman", Times, serif;
+}
+input[type=text], input[type=number] {
+  background-color: #38484B;
+  border-color: #070B0D;
+  color: #CACECE;
+}
+button {
+  background-color: #69140E;
+  border-radius: 10px;
+  border-color: #462425;
+  color: #CACECE;
+}
+select {
+  background-color: #69140E;
+  border-radius: 10px;
+  border-color: #462425;
+  color: #CACECE;
+}
+select:focus {
+  outline: none;
+}
+option:focus {
+  background-color: #0E171B;
+  color: #CACECE;
+  outline: none;
+}
+input[type=text]:focus, input[type=number]:focus {
+  outline: none;
+}
+label {
+  color: #CACECE;
+}
+.important {
+  padding: 8px;
+}
+.bold{
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  border-color: #F2F4F3;
+  width: 100%;
+}
+td {
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 4px;
+  background-color: #22333B;
+  text-align: center;
+}
+th {
+  border: 1px solid;
+  border-collapse: collapse;
+  padding: 4px;
+  background-color: #3c5a68;
+}
+.firstrow {
+  background-color: #3c5a68;
+}
+.startgame, .playerturn1, .playerturn2, .endround, .endgame, #invaildinputstext {
+  display: none;
+}
+
+
+
+
+/* Hehehehe stolen code */
+
+.checkboxstyle {
+  display: block;
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkboxstyle input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 15px;
+  width: 15px;
+  background-color: #798478;
+}
+.checkmarktable {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  height: 15px;
+  width: 15px;
+  background-color: #798478;
+}
+
+
+/* On mouse-over, add a grey background color */
+.checkboxstyle:hover input ~ .checkmark, .checkboxstyle:hover input ~ .checkmarktable {
+  background-color: #75685E;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkboxstyle input:checked ~ .checkmark, .checkboxstyle input:checked ~ .checkmarktable {
+  background-color: #6D3029;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after, .checkmarktable:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkboxstyle input:checked ~ .checkmark:after, .checkboxstyle input:checked ~ .checkmarktable:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkboxstyle .checkmark:after, .checkboxstyle .checkmarktable:after {
+  left: 5px;
+  top: 2.5px;
+  width: 3px;
+  height: 7px;
+  border: solid #F2F4F3;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* Hehe steal even more code */
+.loading::after {
+  display: inline-block;
+  animation: dotty steps(1, end) 1s infinite;
+  content: '';
+}
+    
+@keyframes dotty {
+  0%   { content: ''; }
+  25%  { content: '.'; }
+  50%  { content: '..'; }
+  75%  { content: '...'; }
+  100% { content: ''; }
+  }
+
+    /* EOS */
+  </style>
+
+  <script id="insert"></script>
+
+</head>
+<body>
+    <!DOCTYPE html>
+<html>
+
+  <head>
+    <title>HAT Game Visual AId</title>
+    <!--Nice colors: https://coolors.co/0e171b-cacece-f2f4f3-69140e-462425-22333b-647069-798478-75685e-6d3029-->
+  </head>
+
+  <body>
+    <h1>HAT Visual Aid</h1>
+    <p class="pregame">This website is designed to streamline your HAT experience. Please input the player names in the text box below, and select the rules you wish to play with.</p>
+    <p class="startgame" id="Start Game Message">Have fun, and may the best player win!</p>
+    <form>
+      <!--
+      <label class="checkboxstyle pregame">
+      Use Insane Rules
+      <input type="checkbox" id="Insane Rules Button" name="Insane Rules Button" class="pregame">
+      <span class="checkmark pregame"></span>
+      </label>
+      -->
+
+      <label class="checkboxstyle pregame">
+      Use Murder Rules
+      <input type="checkbox" id="Murder Rules Button" name="Murder Rules Button" class="pregame">
+      <span class="checkmark pregame"></span>
+      </label>
+
+      <label class="checkboxstyle pregame">
+      Use Bank Rules
+      <input type="checkbox" id="Bank Rules Button" name="Bank Rules Button" class="pregame">
+      <span class="checkmark pregame"></span>
+      </label>
+    </form>
+    
+    <h3 id="player_list_text" class="pregame">Players: </h3>
+    
+    <input type="text" id="New Player Name" name="New Player Name" class="pregame">
+    <button onclick="updateListOfPlayers()" id="Add New Player" name="Add New Player" class="pregame">Add Player!</button>
+    <br class="startgame">
+    <table class="startgame">
+      <th id="roundnumber">ROUND #1</th>
+      <th class="bank" id="bankgold">Bank: <span id="Bank Total"></span></th>
+    </table>
+    <br class="pregame"><br>
+    <button onclick="startgame()" class="pregame">Start Game!</button>
+    <br>
+    <span id="Table Go Here"></span><br>
+    
+    <br>
+    <p class="startgame startround" id="Start Round Message">Round #1 has started! Take a look at where everyone stands, and write down your actions!</p>
+    <button onclick="startturns()" class="startgame startround" id="Start Actions Button">Start Turns!</button>
+    
+    <p class="playerturn1" id="Player Turn Message"></p>
+    <p class="playerturn1" id="Player Turn Message 2">Please select your actions from the menus below:</p>
+    
+    <p class="playerturn2">You have chosen to <span id="Playerturn2 Action Message"></span>.</p>
+    <br class="playerturn2 probability">
+    <label class="playerturn2 probability" for="Roll Probability Button" id="Roll Probability Button Label">Let's see if you succeed!</label>
+    <button onclick="rollprobability()" class="playerturn2 probability" id="Roll Probability Button">Roll Probability</button>
+    <span class="playerturn2 probability" id="Loading Text"></span>
+    <span class="playerturn2 probability" id="Success Failure Text"></span>
+    
+    <p class="endround" id="End Round Message">This round has ended! Hit the button to continue</p>
+    <button onclick="endround()" class="endround" id="End Round Button">End Round</button>
+    <p class="endgame">This game of HAT has ended! <span id="Endgame Who Won Message"></span></p>
+    
+    <br>
+    <button onclick="nextturn()" class="playerturn2" id="Next Turn Button">Next Turn</button>
+    
+    <label for="Jail Action" class="playerturn1 jail">Jail Options: </label>
+    <select name="Jail Action" id="Jail Action" class="playerturn1 jail">
+      <option value="Stay">Stay</option>
+      <option value="Skedaddle">Skedaddle</option>
+    </select>
+    
+    <label for="Action 1" class="playerturn1 nonjail">First Action: </label>
+    <select name="Action 1" id="Action 1" class="playerturn1 nonjail" onclick="secondactionbutton()">
+      <option value="Work 1" id="Action 1 Work">Work</option>
+      <option value="Watch 1" id="Action 1 Watch">Watch</option>
+      <option value="Steal 1" id="Action 1 Steal">Steal (2 Actions)</option>
+      <option value="Shop 1" class="murder" id="Action 1 Shop">Shop</option>
+      <option value="Murder 1" class="murder" id="Action 1 Murder">Murder (2 Actions)</option>
+      <option value="Visit Bank 1" class="bank" id="Action 1 Visit Bank">Visit Bank</option>
+      <option value="Rob Bank 1" class="bank" id="Action 1 Rob Bank">Rob Bank (2 Actions)</option>
+    </select>
+    
+    <br class="playerturn1 nonjail">
+    <label for="Action 2" class="playerturn1 nonjail">Second Action: </label>
+    <select name="Action 2" id="Action 2" class="playerturn1 nonjail" onclick="secondactionbutton()">
+      <option value="Work 2" id="Action 2 Work">Work</option>
+      <option value="Watch 2" id="Action 2 Watch">Watch</option>
+      <option value="Steal 2"  id="Action 2 Steal">Steal (2 Actions)</option>
+      <option value="Shop 2" class="murder" id="Action 2 Shop">Shop</option>
+      <option value="Murder 2" class="murder" id="Action 2 Murder">Murder (2 Actions)</option>
+      <option value="Visit Bank 2" class="bank" id="Action 2 Visit Bank">Visit Bank</option>
+      <option value="Rob Bank 2" class="bank" id="Action 2 Rob Bank">Rob Bank (2 Actions)</option>
+    </select>
+    
+    <br>
+    <span class="playerturn1 actionoptions" id="stealactionoptions">
+      <b>Steal Options:</b><br>
+      <label for="Steal From Player">Select who to steal from: </label>
+      <select name="Steal From Player" id="Steal From Player">
+      </select>
+      <br>
+      <label for="Steal How Many Watches">Select how many times they Watched: </label>
+      <select name="Steal How Many Watches" id="Steal How Many Watches">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+      </select>
+      <br>
+      <label for="Steal Value Input">Input amount to Steal: </label>
+      <input type="number" id="Steal Value Input" name="Steal Value Input" min="0">
+      <br>
+    </span>
+    
+    <span class="playerturn1 actionoptions" id="murderactionoptions">
+      <b>Murder Options:</b><br>
+      <span id="Murder No Sword Message">You do not have a sword. You need to buy a sword from the shop before you can kill anyone.</span>
+      <label for="Murder Player" class="murderhassword">Select who to murder: </label>
+      <select name="Murder Player" id="Murder Player" class="murderhassword">
+      </select>
+      <br class="murderhassword">
+      <label for="Murder How Many Watches" class="murderhassword">Select how many times they Watched: </label>
+      <select name="Murder How Many Watches" id="Murder How Many Watches" class="murderhassword">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+      </select>
+      <br class="murderhassword">
+      <label for="Murder Have Bodygaurd" class="murderhassword">Did they buy a boadygaurd this round? </label>
+      <select id="Murder Have Bodygaurd" name="Murder Have Bodygaurd" class="murderhassword">
+        <option>Yes</option>
+        <option>No</option>
+      </select>
+      <br class="murderhassword">
+    </span>
+    
+    <span class="playerturn1 actionoptions" id="robbankactionoptions">
+      <b>Rob Bank Options:</b><br>
+      <label for="Bank Bribe Input">Input how much gold you want to bribe the gaurds with: </label>
+      <input type="number" id="Bank Bribe Input" name="Bank Bribe Input" min="0">
+      <br>
+    </span>
+    
+    <span class="playerturn1 actionoptions" id="shopactionoptions">
+      <b>Shop Options:</b><br>
+      <span id="Shop No Rights Message">You have lost your right to be in the shop.</span>
+      
+      <label class="checkboxstyle shophasrights">
+      Buy a sword (30 Gold)
+      <input type="checkbox" id="buyswordcheckbox" name="buyswordcheckbox">
+      <span class="checkmark"></span>
+      </label>
+      <br class="shophasrights">
+      <label class="checkboxstyle shophasrights">
+      Buy a bribe (20 Gold)
+      <input type="checkbox" id="buybribecheckbox" name="buybribecheckbox">
+      <span class="checkmark"></span>
+      </label>
+      <br class="shophasrights">
+      <label class="checkboxstyle shophasrights">
+      Buy a bodygaurd (20 Gold)
+      <input type="checkbox" id="buygaurdcheckbox" name="buygaurdcheckbox">
+      <span class="checkmark"></span>
+      </label>
+      <br class="shophasrights">
+    </span>
+    
+    <span class="playerturn1 actionoptions" id="visitbankactionoptions">
+      <b>Visit Bank Options:</b><br>
+      <span id="Vist Bank No RIghts Message">You have lost your right to visit the bank.</span>
+      <label class="checkboxstyle visitbankhasrights">
+      Deposit
+      <input type="radio" id="Visit Bank Deposit Input" name="Visit Bank Deposit/Withdrawal Input" checked onclick="visitbanktext()">
+      <span class="checkmark"></span>
+      </label>
+      <br class="visitbankhasrights">
+      <label class="checkboxstyle visitbankhasrights">
+      Withdrawal
+      <input type="radio" id="Visit Bank Withdrawal Input" name="Visit Bank Deposit/Withdrawal Input" onclick="visitbanktext()">
+      <span class="checkmark"></span>
+      </label>
+      <br class="visitbankhasrights">
+      <label for="Deposit/Withdrawal Num Input" class="visitbankhasrights">Input how much gold you want to <span id="Vist Bank Deposit/Withdrawal Text">deposit</span>: </label>
+      <input type="number" id="Deposit/Withdrawal Num Input" name="Deposit/Withdrawal Num Input" class="visitbankhasrights" min="0">
+      <br class="visitbankhasrights">
+    </span>
+    
+    <button onclick="submitactions()" class="playerturn1" id="Submit Actions Button">Submit Actions</button>
+    <br>
+    <span id="invaildinputstext">Invaild inputs! Remember, you can only use the gold present at the start of the round.</span>
+  </body>
+
+</html>
+
+
+    <script type="text/javascript">//<![CDATA[
+
+
+var round_num = 1;
+var turn_num = 0
+var bank_total = 100;
+var bank_total_startround = bank_total;
+const player_list = [];
+var is_trey_playing = false;
+var pocket_gold_list = [];
+var pocket_gold_list_startround = [];
+var deposit_gold_list = [];
+var deposit_gold_list_startround = [];
+var jail_timeleft_list = [];
+
+/* 
+TODO: 
+*/
+
+/* Shorthand Functions */
+function GE(id) {
+  return document.getElementById(id);
+}
+function tblbid(player, column, modetype) {
+  var returnstr = ("Tablebox" + player) + column;
+  if (modetype == "bs") {
+    returnstr += "_base";
+  } else if (modetype == "m") {
+    returnstr += "_murder";
+  } else if (modetype == "bn") {
+    returnstr += "_bank"
+  }
+  return returnstr;
+}
+function playerindex(name) {
+  return player_list.indexOf(name);
+}
+function showelements(x) {
+  var divsToShow = document.getElementsByClassName(x);
+  for (var i = 0; i < divsToShow.length; i++) {
+    divsToShow[i].style.display = "initial";
+  }
+}
+function hideelements(x) {
+  var divsToHide = document.getElementsByClassName(x);
+  for (var i = 0; i < divsToHide.length; i++) {
+    divsToHide[i].style.display = "none";
+  }
+}
+function hidebankmurder() {
+  if (GE("Murder Rules Button").checked == false) {
+    hideelements("murder");
+  }
+  if (GE("Bank Rules Button").checked == false) {
+    hideelements("bank");
+  }
+}
+function setselectelement(id, valueToSelect) {
+  let element = GE(id);
+  element.value = valueToSelect;
+}
+
+
+/* Functions tied to specific buttons */
+function updateListOfPlayers() {
+  if (GE("New Player Name").value != "") {
+    if (GE("player_list_text").innerHTML.length == 9) {
+      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + GE("New Player Name").value;
+    } else {
+      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + ", " + GE("New Player Name").value;
+    }
+    if (GE("New Player Name").value == "Trey") {
+      is_trey_playing = true;
+    }
+    player_list.push(GE("New Player Name").value);
+    pocket_gold_list.push(20);
+    deposit_gold_list.push(0);
+    jail_timeleft_list.push(0);
+  }
+  GE("New Player Name").value = "";
+}
+
+function startgame() {
+  if (player_list.length > 1) {
+    createtable();
+    createsteallist();
+    createmurderlist();
+    hideelements("pregame");
+    showelements("startgame");
+    hidebankmurder();
+    if (is_trey_playing == true) {
+      GE("Start Game Message").innerHTML = "Have fun, and may the best player (a.k.a. Trey) win!";
+    }
+    GE("Bank Total").innerHTML = "" + bank_total;
+  }
+}
+
+function startturns() {
+  while (true == true) {
+    if (turn_num == player_list.length) {
+      break;
+    } else if (GE(tblbid(turn_num, 4, "bs")).checked == true) {
+      turn_num = (turn_num + 1);
+    } else {
+      break;
+    }
+  }
+  hideelements("startround");
+  showelements("playerturn1");
+  hidebankmurder();
+  GE("Action 2 Steal").style.display = "none";
+  GE("Action 2 Murder").style.display = "none";
+  GE("Action 2 Rob Bank").style.display = "none";
+  hideelements("actionoptions");
+  GE("Player Turn Message").innerHTML = player_list[turn_num] + ", it is your turn!"
+  bank_total_startround = bank_total;
+  deposit_gold_list_startround = JSON.parse(JSON.stringify(deposit_gold_list));
+  pocket_gold_list_startround = JSON.parse(JSON.stringify(pocket_gold_list));
+  clearforms();
+  if (GE(tblbid(turn_num, 2, "bs")).checked == false) {
+    hideelements("jail");
+  } else {
+    hideelements("nonjail");
+  }
+}
+
+function secondactionbutton() {
+  if (GE("Action 1").value == "Steal 1") {
+    GE("stealactionoptions").style.display = "initial";
+    GE("Action 2 Steal").style.display = "initial";
+    GE("Action 2").setAttribute("disabled", "");
+    setselectelement("Action 2", "Steal 2");
+  } else {
+    if (GE("Action 2").value == "Steal 2") {
+      setselectelement("Action 2", "Work 2");
+      GE("Action 2 Steal").style.display = "none";
+    }
+    GE("stealactionoptions").style.display = "none";
+  }
+  if (GE("Action 1").value == "Murder 1") {
+    GE("murderactionoptions").style.display = "initial";
+    GE("Action 2 Murder").style.display = "initial";
+    GE("Action 2").setAttribute("disabled", "");
+    setselectelement("Action 2", "Murder 2");
+    if (GE(tblbid(turn_num, 0, "m")).checked == true) {
+      GE("Murder No Sword Message").style.display = "none";
+      showelements("murderhassword");
+    } else {
+      GE("Murder No Sword Message").style.display = "initial";
+      hideelements("murderhassword");
+    }
+  } else {
+    if (GE("Action 2").value == "Murder 2") {
+      setselectelement("Action 2", "Work 2");
+      GE("Action 2 Murder").style.display = "none";
+    }
+    GE("murderactionoptions").style.display = "none";
+  }
+
+  if (GE("Action 1").value == "Rob Bank 1") {
+    GE("robbankactionoptions").style.display = "initial";
+    GE("Action 2 Rob Bank").style.display = "initial";
+    GE("Action 2").setAttribute("disabled", "");
+    setselectelement("Action 2", "Rob Bank 2");
+  } else {
+    if (GE("Action 2").value == "Rob Bank 2") {
+      setselectelement("Action 2", "Work 2");
+      GE("Action 2 Rob Bank").style.display = "none";
+    }
+    GE("robbankactionoptions").style.display = "none";
+  }
+
+  if (GE("Action 1").value == "Shop 1" || GE("Action 2").value == "Shop 2") {
+    GE("shopactionoptions").style.display = "initial";
+    GE("Action 2").removeAttribute("disabled", "");
+    if (GE(tblbid(turn_num, 0, "bn")).checked == true) {
+      GE("Shop No Rights Message").style.display = "none";
+      showelements("shophasrights");
+    } else {
+      GE("Shop No Rights Message").style.display = "initial";
+      hideelements("shophasrights");
+    }
+  } else {
+    GE("shopactionoptions").style.display = "none";
+  }
+
+  if (GE("Action 1").value == "Visit Bank 1" || GE("Action 2").value == "Visit Bank 2") {
+    GE("visitbankactionoptions").style.display = "initial";
+    GE("Action 2").removeAttribute("disabled", "");
+    if (GE(tblbid(turn_num, 0, "bn")).checked == true) {
+      GE("Vist Bank No RIghts Message").style.display = "none";
+      showelements("visitbankhasrights");
+    } else {
+      GE("Vist Bank No RIghts Message").style.display = "initial";
+      hideelements("visitbankhasrights");
+    }
+  } else {
+    GE("visitbankactionoptions").style.display = "none";
+  }
+
+  if (GE("Murder Rules Button").checked == true) {
+    if (GE("Action 1").value == "Shop 1") {
+      GE("Action 2 Shop").style.display = "none";
+    } else {
+      GE("Action 2 Shop").style.display = "initial";
+    }
+    if (GE("Action 2").value == "Shop 2") {
+      GE("Action 1 Shop").style.display = "none";
+    } else {
+      GE("Action 1 Shop").style.display = "initial";
+    }
+  }
+  if (GE("Bank Rules Button").checked == true) {
+    if (GE("Action 1").value == "Visit Bank 1") {
+      GE("Action 2 Visit Bank").style.display = "none";
+    } else {
+      GE("Action 2 Visit Bank").style.display = "initial";
+    }
+    if (GE("Action 2").value == "Visit Bank 2") {
+      GE("Action 1 Visit Bank").style.display = "none";
+    } else {
+      GE("Action 1 Visit Bank").style.display = "initial";
+    }
+  }
+  if (GE("Action 1").value == "Work 1" || GE("Action 1").value == "Watch 1" || GE("Action 2").value == "Work 2" || GE("Action 2").value == "Watch 2") {
+    GE("Action 2").removeAttribute("disabled", "");
+  }
+}
+
+function submitactions() {
+  const action1value = GE("Action 1").value;
+  const action2value = GE("Action 2").value;
+  const playerinjail = (GE(tblbid(turn_num, 2, "bs"))).checked;
+  const jailactionvalue = GE("Jail Action").value;
+  const twoactionoptions = new Set(["Steal 1", "Murder 1", "Rob Bank 1"]);
+  var message = "";
+  var vaildinputs = true;
+  if (
+    action1value == "Steal 1" &&
+    GE("Steal Value Input").value >
+    pocket_gold_list_startround[playerindex(GE("Steal From Player").value)]
+  ) {
+    vaildinputs = false;
+  }
+  if (
+    (GE("buyswordcheckbox").checked ? 30 : 0) +
+    (GE("buygaurdcheckbox").checked ? 20 : 0) +
+    (GE("buybribecheckbox").checked ? 20 : 0) >
+    pocket_gold_list_startround[turn_num]
+  ) {
+    vaildinputs = false;
+  }
+  if (
+  	GE("Visit Bank Deposit Input").checked == true && 
+    pocket_gold_list_startround[turn_num] - 
+    (
+    	(GE("buyswordcheckbox").checked ? 30 : 0) +
+    	(GE("buygaurdcheckbox").checked ? 20 : 0) +
+    	(GE("buybribecheckbox").checked ? 20 : 0)
+    ) < 
+    Number(GE("Deposit/Withdrawal Num Input").value)
+  ) {
+  	vaildinputs = false;
+  }
+  if (
+  	GE("Visit Bank Withdrawal Input").checked == true && 
+    deposit_gold_list_startround[turn_num] < 
+    Number(GE("Deposit/Withdrawal Num Input").value)
+  ) {
+  	vaildinputs = false;
+  }
+
+  if (vaildinputs == true) {
+    GE("invaildinputstext").style.display = "none";
+    hideelements("playerturn1");
+  	showelements("playerturn2");
+  	GE("Success Failure Text").innerHTML = "";
+    if (twoactionoptions.has(action1value) && playerinjail == false) {
+      if (action1value == "Steal 1") {
+        message = (
+          "steal " + GE("Steal Value Input").value +
+          " gold from " + GE("Steal From Player").value +
+          " who watched " + GE("Steal How Many Watches").value + " time");
+        if (GE("Steal How Many Watches").value != "1") {
+          message += "s";
+        }
+      }
+      if (action1value == "Murder 1") {
+        message = "murder - with";
+        if (GE(tblbid(turn_num, 1, "m")).checked == false) {
+          message += "out"
+        }
+        message += " a bribe - " + GE("Murder Player").value + ", who watched " + GE("Murder How Many Watches").value + " time"
+        if (GE("Murder How Many Watches").value != "1") {
+          message += "s";
+        }
+        message += ", and did";
+        const murderedplayerindex = player_list.indexOf(GE("Murder Player").value);
+        if (GE(tblbid(murderedplayerindex, 2, "m")).checked == false) {
+          message += " not";
+        }
+        message += " have a bodygaurd";
+      }
+      if (action1value == "Rob Bank 1") {
+        message = "rob the bank with a " + GE("Bank Bribe Input").value + " gold bribe";
+        pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - Number(GE("Bank Bribe Input").value);
+      }
+    } else if (playerinjail == false) {
+      if (action1value == "Work 1" && action2value == "Work 2") {
+        message = "work hard, earning you 10 gold";
+      } else if (action1value == "Watch 1" && action2value == "Watch 2") {
+        message = "remain ever-vigilant and watch twice, giving you exetreme protection";
+      } else if ((action1value == "Watch 1" && action2value == "Work 2") || (action1value == "Work 1" && action2value == "Watch 2")) {
+        message = "hardly work, earning you 5 gold and giving you more protection";
+      } else {
+        var message1 = action1value;
+        var message2 = action2value;
+        message1 = message1.replace("W", "w").replace("S", "s").replace("V", "v").replace("B", "b").replace(" 1", "");
+        message2 = message2.replace("W", "w").replace("S", "s").replace("V", "v").replace("B", "b").replace(" 2", "");
+        if (message1 == "visit bank") {
+          message1 = "visit the bank";
+        }
+        if (message2 == "visit bank") {
+          message2 = "visit the bank";
+        }
+        message = message1 + " and " + message2 + ", ";
+        if (action1value == "Work 1" || action2value == "Work 2") {
+          message += "earning you 5 gold and ";
+        }
+        if (action1value == "Watch 1" || action2value == "Watch 2") {
+          message += "giving you more protection and ";
+        }
+        if (action1value == "Shop 1" || action2value == "Shop 2") {
+          message += "giving you ";
+          if (GE("buyswordcheckbox").checked == true) {
+            message += "a sword and ";
+            pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - 30;
+            GE(tblbid(turn_num, 0, "m")).checked = true;
+          }
+          if (GE("buybribecheckbox").checked == true) {
+            message += "a bribe and ";
+            pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - 20;
+            GE(tblbid(turn_num, 1, "m")).checked = true;
+          }
+          if (GE("buygaurdcheckbox").checked == true) {
+            message += "a gaurd and ";
+            pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - 20;
+            GE(tblbid(turn_num, 2, "m")).checked = true;
+          }
+        }
+        if (action1value == "Visit Bank 1" || action2value == "Visit Bank 2") {
+          if (GE("Visit Bank Deposit Input").checked == true) {
+            message += "making " + GE("Deposit/Withdrawal Num Input").value + " gold more secure and ";
+            pocket_gold_list[turn_num] = pocket_gold_list[turn_num] - Number(GE("Deposit/Withdrawal Num Input").value);
+            deposit_gold_list[turn_num] = deposit_gold_list[turn_num] + Number(GE("Deposit/Withdrawal Num Input").value);
+            bank_total = bank_total + Number(GE("Deposit/Withdrawal Num Input").value);
+          }
+          if (GE("Visit Bank Withdrawal Input").checked == true) {
+            message += "making " + GE("Deposit/Withdrawal Num Input").value + " gold available and ";
+            pocket_gold_list[turn_num] = pocket_gold_list[turn_num] + Number(GE("Deposit/Withdrawal Num Input").value);
+            deposit_gold_list[turn_num] = deposit_gold_list[turn_num] - Number(GE("Deposit/Withdrawal Num Input").value);
+            bank_total = bank_total - Number(GE("Deposit/Withdrawal Num Input").value);
+          }
+        }
+        message = message.substring(0, message.lastIndexOf(" and "));
+      }
+      hideelements("probability");
+      if (action1value == "Work 1") {
+        pocket_gold_list[turn_num] = pocket_gold_list[turn_num] + 5;
+      }
+      if (action2value == "Work 2") {
+        pocket_gold_list[turn_num] = pocket_gold_list[turn_num] + 5;
+      }
+    } else {
+      if (GE("Jail Action").value == "Stay") {
+        jail_timeleft_list[turn_num] = jail_timeleft_list[turn_num] - 1;
+        message = "stay in jail";
+        if (jail_timeleft_list[turn_num] == 2) {
+          message += " - only 2 rounds left";
+        }
+        if (jail_timeleft_list[turn_num] == 1) {
+          message += " - only 1 round left";
+        }
+        if (jail_timeleft_list[turn_num] == 0) {
+          message += ", finishing your sentence";
+          GE(tblbid(turn_num, 2, "bs")).checked = false;
+          GE(tblbid(turn_num, 3, "bs")).checked = false;
+        }
+        hideelements("probability");
+      }
+      if (GE("Jail Action").value == "Skedaddle") {
+        message = "escape from jail";
+      }
+    }
+    GE("Playerturn2 Action Message").innerHTML = message;
+    updategold();
+  } else {
+    GE("invaildinputstext").style.display = "initial";
+  }
+
+}
+
+function rollprobability() {
+  GE("Roll Probability Button").style.display = "none";
+  GE("Roll Probability Button Label").style.display = "none";
+  GE("Loading Text").innerHTML = "Calculating";
+  GE("Loading Text").setAttribute("class", "loading");
+
+  var success_or_failure = "";
+  var probability_of_success = 0;
+  const action1value = GE("Action 1").value;
+  const playerinjail = (GE(tblbid(turn_num, 2, "bs"))).checked;
+  const jailactionvalue = GE("Jail Action").value;
+  const randomnum = Math.random();
+  console.log(randomnum);
+
+  if (playerinjail == true && jailactionvalue == "Skedaddle") {
+    probability_of_success = 0.33333;
+
+  } else if (playerinjail == false && action1value == "Steal 1") {
+    probability_of_success = 1 - (Number(GE("Steal Value Input").value) / 60 * Math.pow(2, Number(GE("Steal How Many Watches").value)));
+
+  } else if (action1value == "Murder 1") {
+    probability_of_success = 0.75;
+    if (GE("Steal How Many Watches").value != "0") {
+      probability_of_success = probability_of_success - 0.25;
+    }
+    if (GE(tblbid(turn_num, 1, "m")).checked == false) {
+      probability_of_success = probability_of_success - 0.25;
+    }
+    var murderedplayerindex = player_list.indexOf(GE("Murder Player").value);
+    if (GE("Murder Have Bodygaurd").value == "Yes") {
+      probability_of_success = probability_of_success / 2;
+    }
+
+  } else if (action1value == "Rob Bank 1") {
+    probability_of_success = (2 * Number(GE("Bank Bribe Input").value)) / (3 * bank_total_startround);
+  }
+
+  if (randomnum < probability_of_success) {
+    var success_or_failure = "SUCCESS";
+  } else {
+    var success_or_failure = "FAILURE";
+  }
+
+  setTimeout(function() {
+    GE("Loading Text").removeAttribute("class", "loading");
+    GE("Loading Text").innerHTML = "";
+    GE("Success Failure Text").innerHTML = success_or_failure;
+
+    if (playerinjail == true && jailactionvalue == "Skedaddle") {
+      if (success_or_failure == "SUCCESS") {
+        GE(tblbid(turn_num, 2, "bs")).checked = false;
+        GE(tblbid(turn_num, 3, "bs")).checked = false;
+        jail_timeleft_list[turn_num] = 0;
+      } else if (GE(tblbid(turn_num, 3, "bs")).checked == true) {
+        cleartablecheckbox(turn_num);
+        GE(tblbid(turn_num, 4, "bs")).checked = true;
+        GE("Steal List Num_" + turn_num).remove();
+        GE("Murder List Num_" + turn_num).remove();
+      } else {
+        jail_timeleft_list[turn_num] = 3;
+        GE(tblbid(turn_num, 3, "bs")).checked = true;
+      }
+    } else if (playerinjail == false && action1value == "Steal 1") {
+      if (success_or_failure == "SUCCESS") {
+        pocket_gold_list[turn_num] = pocket_gold_list[turn_num] + Number(GE("Steal Value Input").value);
+        pocket_gold_list[playerindex(GE("Steal From Player").value)] = pocket_gold_list[playerindex(GE("Steal From Player").value)] - Number(GE("Steal Value Input").value);
+      } else {
+        bank_total += pocket_gold_list_startround[turn_num];
+        pocket_gold_list[turn_num] = 0;
+        GE(tblbid(turn_num, 2, "bs")).checked = true;
+        jail_timeleft_list[turn_num] = 3;
+      }
+    } else if (action1value == "Murder 1") {
+      GE(tblbid(turn_num, 1, "m")).checked = false;
+      var murderedplayerindex = player_list.indexOf(GE("Murder Player").value);
+      if (success_or_failure == "SUCCESS") {
+        cleartablecheckbox(murderedplayerindex);
+        GE(tblbid(murderedplayerindex, 4, "bs")).checked = true;
+        pocket_gold_list[turn_num] = pocket_gold_list[turn_num] + pocket_gold_list_startround[murderedplayerindex];
+        pocket_gold_list[murderedplayerindex] = pocket_gold_list[murderedplayerindex] - pocket_gold_list_startround[murderedplayerindex];
+        GE("Steal List Num_" + murderedplayerindex).remove();
+        GE("Murder List Num_" + murderedplayerindex).remove();
+      } else {
+        cleartablecheckbox(turn_num);
+        GE(tblbid(turn_num, 4, "bs")).checked = true;
+        bank_total += pocket_gold_list_startround[turn_num];
+        pocket_gold_list[turn_num] = 0;
+        GE("Steal List Num_" + turn_num).remove();
+        GE("Murder List Num_" + turn_num).remove();
+      }
+    } else if (action1value == "Rob Bank 1") {
+      if (success_or_failure == "SUCCESS") {
+        pocket_gold_list[turn_num] += bank_total_startround;
+        bank_total = bank_total - bank_total_startround;
+        for (let i = 0; i < deposit_gold_list.length; i++) {
+          deposit_gold_list[i] = deposit_gold_list[i] - deposit_gold_list_startround[i];
+        }
+      } else {
+        bank_total += pocket_gold_list_startround[turn_num];
+        pocket_gold_list[turn_num] = 0;
+        GE(tblbid(turn_num, 2, "bs")).checked = true;
+        GE(tblbid(turn_num, 3, "bs")).checked = true;
+        GE(tblbid(turn_num, 0, "bn")).checked = false;
+        jail_timeleft_list[turn_num] = 3;
+      }
+    }
+    updategold();
+  }, 2000);
+}
+
+function nextturn() {
+  turn_num = turn_num + 1
+  while (true == true) {
+    if (turn_num == player_list.length) {
+      break;
+    } else if (GE(tblbid(turn_num, 4, "bs")).checked == true) {
+      turn_num = (turn_num + 1);
+    } else {
+      break;
+    }
+  }
+  GE("Action 2").removeAttribute("disabled", "");
+  setselectelement("Action 1", "Work 1");
+  setselectelement("Action 2", "Work 2");
+  setselectelement("Jail Action", "Stay");
+  GE("Action 2 Steal").style.display = "none";
+  GE("Action 2 Murder").style.display = "none";
+  GE("Action 2 Rob Bank").style.display = "none";
+  clearforms();
+  hideelements("playerturn2");
+  GE("Playerturn2 Action Message").innerHTML = "";
+  if (turn_num == player_list.length) {
+    showelements("endround");
+  } else {
+    GE("Player Turn Message").innerHTML = player_list[turn_num] + ", it is your turn!";
+    showelements("playerturn1");
+    hideelements("actionoptions");
+    if (GE(tblbid(turn_num, 2, "bs")).checked == true) {
+      hideelements("nonjail");
+      showelements("jail");
+    } else {
+      hideelements("jail");
+    }
+  }
+}
+
+function endround() {
+  round_num = round_num + 1
+  turn_num = 0
+  hideelements("endround");
+  var everyonedead = true;
+  for (let i = 0; i < player_list.length; i++) {
+    if (GE(tblbid(i, 4, "bs")).checked == false) {
+      everyonedead = false;
+    }
+  }
+  if (everyonedead == true || round_num == 11) {
+    showelements("endgame");
+    GE("roundnumber").innerHTML = "GAME END";
+    var winner_list = [];
+    var highest_gold = 0;
+    for (let player_list_iter = 0; player_list_iter < player_list.length; player_list_iter++) {
+      if (GE(tblbid(player_list_iter, 4, "bs")).checked == false) {
+        if (highest_gold < pocket_gold_list[player_list_iter] + deposit_gold_list[player_list_iter]) {
+          highest_gold = pocket_gold_list[player_list_iter] + deposit_gold_list[player_list_iter];
+          winner_list = [player_list[player_list_iter]];
+        } else if (highest_gold == pocket_gold_list[player_list_iter] + deposit_gold_list[player_list_iter]) {
+          winner_list.push(player_list[player_list_iter]);
+        }
+      }
+    }
+    if (winner_list.length == 1) {
+      GE("Endgame Who Won Message").innerHTML = winner_list[0] + " has won with " + highest_gold + " gold! Congratulations!";
+    } else if (winner_list.length == 0) {
+      GE("Endgame Who Won Message").innerHTML = "Everyone has died, and thus no one has won. Congratulations?";
+    } else {
+      var message = "";
+      for (let winner_list_iter = 0; winner_list_iter < winner_list.length; winner_list_iter++) {
+        message = message + winner_list[winner_list_iter] + " and ";
+      }
+      message = message.substring(0, message.lastIndexOf(" and "));
+      GE("Endgame Who Won Message").innerHTML = message + " have each won with " + highest_gold + " gold! Congratulations!";
+    }
+
+  } else if (round_num == 10) {
+    showelements("startround");
+    GE("Start Round Message").innerHTML = "The Final Round has started! Take a look at where everyone stands, and write down your actions!";
+    GE("roundnumber").innerHTML = "FINAL ROUND";
+  } else {
+    showelements("startround");
+    GE("Start Round Message").innerHTML = "Round #" + round_num + " has started! Take a look at where everyone stands, and write down your actions!";
+    GE("roundnumber").innerHTML = "ROUND #" + round_num;
+  }
+  for (let i = 0; i < pocket_gold_list.length; i++) {
+    if (pocket_gold_list[i] < 0) {
+      pocket_gold_list[i] = 0;
+    }
+  }
+  if (bank_total < 0) {
+    bank_total = 0;
+  }
+  updategold();
+  for (let j = 0; j < player_list.length; j++) {
+    if (GE(tblbid(j, 2, "bs")).checked == true) {
+      GE("Steal List Num_" + j).style.display = "none";
+      GE("Murder List Num_" + j).style.display = "none";
+    } else {
+      GE("Steal List Num_" + j).style.display = "initial";
+      GE("Murder List Num_" + j).style.display = "initial";
+    }
+  }
+}
+
+
+/* Functions to specifically make an element */
+function createtable() {
+  const tbl = document.createElement('table');
+  tbl.setAttribute("class", "startgame");
+  tbl.style.textAlign = "center";
+  var bank_rules = GE("Bank Rules Button").checked;
+  var murder_rules = GE("Murder Rules Button").checked;
+
+  for (let i = 0; i < player_list.length + 1; i++) {
+    const tr = tbl.insertRow();
+    if (true == true) {
+      for (let j_1 = 0; j_1 < 5; j_1++) {
+        const td = tr.insertCell();
+        if (i == 0) {
+          if (j_1 == 0) {
+            td.appendChild(document.createTextNode("Player"));
+            td.setAttribute("class", "important bold firstrow");
+          }
+          if (j_1 == 1) {
+            td.appendChild(document.createTextNode("Gold"));
+            td.setAttribute("class", "important bold firstrow");
+          }
+          if (j_1 == 2) {
+            td.appendChild(document.createTextNode("Jail"));
+            td.setAttribute("class", "firstrow");
+          }
+          if (j_1 == 3) {
+            td.appendChild(document.createTextNode("Caught"));
+            td.setAttribute("class", "firstrow");
+          }
+          if (j_1 == 4) {
+            td.appendChild(document.createTextNode("Dead"));
+            td.setAttribute("class", "firstrow");
+          }
+        } else {
+          if (j_1 == 0) {
+            td.appendChild(document.createTextNode(player_list[i - 1]));
+          }
+          if (j_1 == 1) {
+            const span1 = document.createElement("span");
+            span1.setAttribute("id", "pocket_gold" + (i - 1));
+            span1.appendChild(document.createTextNode(pocket_gold_list[i - 1]));
+            td.appendChild(span1);
+          }
+          if (j_1 == 2 || j_1 == 3 || j_1 == 4) {
+            const label = document.createElement("label");
+            label.setAttribute("class", "checkboxstyle");
+            const input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("id", tblbid((i - 1), j_1, "bs"));
+            const span = document.createElement("span");
+            span.setAttribute("class", "checkmarktable");
+            span.style.top = "-4px";
+            label.appendChild(input);
+            label.appendChild(span);
+            td.appendChild(label);
+          }
+        }
+      }
+    }
+    if (murder_rules == true) {
+      for (let j_2 = 0; j_2 < 2; j_2++) {
+        const td = tr.insertCell();
+        if (i == 0) {
+          if (j_2 == 0) {
+            td.appendChild(document.createTextNode("Sword"));
+            td.setAttribute("class", "murder firstrow");
+          }
+          if (j_2 == 1) {
+            td.appendChild(document.createTextNode("Bribe"));
+            td.setAttribute("class", "murder firstrow");
+          }
+        } else {
+          if (j_2 == 0 || j_2 == 1) {
+            const label = document.createElement("label");
+            label.setAttribute("class", "checkboxstyle");
+            const input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("id", tblbid((i - 1), j_2, "m"));
+            const span = document.createElement("span");
+            span.setAttribute("class", "checkmarktable");
+            span.style.top = "-4px";
+            label.appendChild(input);
+            label.appendChild(span);
+            td.appendChild(label);
+          }
+        }
+      }
+    }
+    if (bank_rules == true) {
+      for (let j_3 = 0; j_3 < 2; j_3++) {
+        const td = tr.insertCell();
+        if (i == 0) {
+          if (j_3 == 0) {
+            td.appendChild(document.createTextNode("Rights"));
+            td.setAttribute("class", "bank firstrow");
+          }
+          if (j_3 == 1) {
+            td.appendChild(document.createTextNode("Deposited"));
+            td.setAttribute("class", "bank bold firstrow");
+          }
+        } else {
+          if (j_3 == 0) {
+            const label = document.createElement("label");
+            label.setAttribute("class", "checkboxstyle");
+            const input = document.createElement("input");
+            input.setAttribute("type", "checkbox");
+            input.setAttribute("checked", "true");
+            input.setAttribute("id", tblbid((i - 1), j_3, "bn"));
+            const span = document.createElement("span");
+            span.setAttribute("class", "checkmarktable");
+            span.style.top = "-4px";
+            label.appendChild(input);
+            label.appendChild(span);
+            td.appendChild(label);
+          }
+          if (j_3 == 1) {
+            const span1 = document.createElement("span");
+            span1.setAttribute("id", "deposit_gold" + (i - 1));
+            span1.appendChild(document.createTextNode(deposit_gold_list[i - 1]));
+            td.appendChild(span1);
+          }
+        }
+      }
+    }
+  }
+  GE("Table Go Here").appendChild(tbl);
+}
+
+function createsteallist() {
+  for (let iter = 0; iter < player_list.length; iter++) {
+    const player_name = player_list[iter];
+    const option_node = document.createElement("option");
+    const option_node_text = document.createTextNode(player_name);
+    option_node.setAttribute("id", "Steal List Num_" + iter);
+    option_node.appendChild(option_node_text);
+    GE("Steal From Player").appendChild(option_node);
+  }
+}
+
+function createmurderlist() {
+  for (let iter = 0; iter < player_list.length; iter++) {
+    const player_name = player_list[iter];
+    const option_node = document.createElement("option");
+    const option_node_text = document.createTextNode(player_name);
+    option_node.setAttribute("id", "Murder List Num_" + iter);
+    option_node.appendChild(option_node_text);
+    GE("Murder Player").appendChild(option_node);
+  }
+}
+
+
+/* Specific Purpose Functions*/
+function clearforms() {
+  GE("Steal Value Input").value = "";
+  GE("Steal From Player").value = "";
+  GE("Steal How Many Watches").value = "";
+  GE("Murder Player").value = "";
+  GE("Murder How Many Watches").value = "";
+  GE("Murder Have Bodygaurd").value = "";
+  GE("Bank Bribe Input").value = "";
+  GE("buyswordcheckbox").checked = false;
+  GE("buybribecheckbox").checked = false;
+  GE("buygaurdcheckbox").checked = false;
+  GE("Visit Bank Deposit Input").checked = false;
+  GE("Visit Bank Withdrawal Input").checked = false;
+  GE("Deposit/Withdrawal Num Input").value = "";
+}
+
+function visitbanktext() {
+  if (GE("Visit Bank Deposit Input").checked == true) {
+    GE("Vist Bank Deposit/Withdrawal Text").innerHTML = "deposit";
+  }
+  if (GE("Visit Bank Withdrawal Input").checked == true) {
+    GE("Vist Bank Deposit/Withdrawal Text").innerHTML = "withdrawal";
+  }
+}
+
+function updategold() {
+  if (GE("Bank Rules Button").checked == true) {
+    GE("Bank Total").innerHTML = "" + bank_total;
+  }
+  for (let i = 0; i < player_list.length; i++) {
+    GE("pocket_gold" + i).innerHTML = "" + pocket_gold_list[i];
+    if (GE("Bank Rules Button").checked == true) {
+      GE("deposit_gold" + i).innerHTML = "" + deposit_gold_list[i];
+    }
+  }
+}
+
+function cleartablecheckbox(x) {
+  GE(tblbid(x, 2, "bs")).checked = false;
+  GE(tblbid(x, 3, "bs")).checked = false;
+  GE(tblbid(x, 4, "bs")).checked = false;
+  if (GE("Murder Rules Button").checked == true) {
+    GE(tblbid(x, 0, "m")).checked = false;
+    GE(tblbid(x, 1, "m")).checked = false;
+    GE(tblbid(x, 2, "m")).checked = false;
+  }
+  if (GE("Bank Rules Button").checked == true) {
+    GE(tblbid(x, 0, "bn")).checked = false;
+  }
+}
+
+
+
+  //]]></script>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "1baxc0qg"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+
+
+</body>
+</html>
