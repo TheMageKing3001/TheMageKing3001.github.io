@@ -461,16 +461,18 @@ function setselectelement(id, valueToSelect) {
 
 /* Functions tied to specific buttons */
 function updateListOfPlayers() {
-  if (GE("New Player Name").value != "") {
+	var playername = GE("New Player Name").value;
+  playername = playername[0].toUpperCase() + playername.substring(1);
+  if (playername != "") {
     if (GE("player_list_text").innerHTML.length == 9) {
-      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + GE("New Player Name").value;
+      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + playername;
     } else {
-      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + ", " + GE("New Player Name").value;
+      GE("player_list_text").innerHTML = GE("player_list_text").innerHTML + ", " + playername;
     }
-    if (GE("New Player Name").value == "Trey") {
+    if (playername == "Trey") {
       is_trey_playing = true;
     }
-    player_list.push(GE("New Player Name").value);
+    player_list.push(playername);
     pocket_gold_list.push(20);
     deposit_gold_list.push(0);
     jail_timeleft_list.push(0);
